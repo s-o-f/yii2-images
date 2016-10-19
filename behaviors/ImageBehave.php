@@ -58,7 +58,7 @@ class ImageBehave extends Behavior
             . '.' .
             pathinfo($absolutePath, PATHINFO_EXTENSION);
         $pictureSubDir = $this->getModule()->getModelSubDir($this->owner);
-        $storePath = $this->getModule()->getStorePath($this->owner);
+        $storePath = $this->getModule()->getStorePath();
 
         $newAbsolutePath = $storePath .
             DIRECTORY_SEPARATOR . $pictureSubDir .
