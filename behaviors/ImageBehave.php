@@ -179,12 +179,7 @@ class ImageBehave extends Behavior
     {
         $finder = $this->getImagesFinder();
 
-        if ($this->getModule()->className === null) {
-            $imageQuery = Image::find();
-        } else {
-            $class = $this->getModule()->className;
-            $imageQuery = $class::find();
-        }
+        $imageQuery = $this->getImageQuery();
         $imageQuery->where($finder);
         $imageQuery->orderBy(['isMain' => SORT_DESC, 'id' => SORT_ASC]);
 
@@ -202,12 +197,7 @@ class ImageBehave extends Behavior
      */
     public function getImage()
     {
-        if ($this->getModule()->className === null) {
-            $imageQuery = Image::find();
-        } else {
-            $class = $this->getModule()->className;
-            $imageQuery = $class::find();
-        }
+        $imageQuery = $this->getImageQuery();
         $finder = $this->getImagesFinder(['isMain' => 1]);
         $imageQuery->where($finder);
         $imageQuery->orderBy(['isMain' => SORT_DESC, 'id' => SORT_ASC]);
@@ -226,12 +216,7 @@ class ImageBehave extends Behavior
      */
     public function getImageByName($name)
     {
-        if ($this->getModule()->className === null) {
-            $imageQuery = Image::find();
-        } else {
-            $class = $this->getModule()->className;
-            $imageQuery = $class::find();
-        }
+        $imageQuery = $this->getImageQuery();
         $finder = $this->getImagesFinder(['name' => $name]);
         $imageQuery->where($finder);
         $imageQuery->orderBy(['isMain' => SORT_DESC, 'id' => SORT_ASC]);
@@ -278,6 +263,18 @@ class ImageBehave extends Behavior
         }
         $img->delete();
     }
+	
+	protected function getImageQuery()
+	{
+        if ($this->getModule()->className === null) {
+            $imageQuery = Image::find();
+        } else {
+            $class = $this->getModule()->className;
+            $imageQuery = $class::find();
+        }
+		
+        return $imageQuery;
+	}
 
     private function getImagesFinder($additionWhere = false)
     {
