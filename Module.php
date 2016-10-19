@@ -88,13 +88,7 @@ class Module extends \yii\base\Module
 
     public function getShortClass($obj)
     {
-        $className = get_class($obj);
-
-        if (preg_match('@\\\\([\w]+)$@', $className, $matches)) {
-            $className = $matches[1];
-        }
-
-        return $className;
+        return \yii\helpers\StringHelper::basename($obj->className())
     }
 
 
