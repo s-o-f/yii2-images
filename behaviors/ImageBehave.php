@@ -263,18 +263,18 @@ class ImageBehave extends Behavior
         }
         $img->delete();
     }
-	
-	protected function getImageQuery()
-	{
+
+    protected function getImageQuery()
+    {
         if ($this->getModule()->className === null) {
             $imageQuery = Image::find();
         } else {
             $class = $this->getModule()->className;
             $imageQuery = $class::find();
         }
-		
+
         return $imageQuery;
-	}
+    }
 
     private function getImagesFinder($additionWhere = false)
     {
